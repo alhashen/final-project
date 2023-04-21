@@ -1,0 +1,11 @@
+Log In with valid user data
+{
+   "status" : 200,
+   "token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTksInVzZXJfZW1haWwiOiJhbm90aGVyX2VtYWlsQGFkZHJlc3MuY29tIn0.WROheBDcRioChRQ2reFoJF7BjsHb7qD6DNMWJdfGtkQ"
+}
+
+Log In with false user data
+{
+   "message" : "Unauthorized: Invalid email or password",
+   "status" : 401
+}

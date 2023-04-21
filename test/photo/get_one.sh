@@ -1,0 +1,19 @@
+#!/bin/sh
+
+url=http://localhost:2400/photos
+valid_id=20
+invalid_id=100
+
+echo -e "Getting valid photo"
+curl -s -X GET $url/$valid_id\
+  -H 'Content-Type: application/json' \
+  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsInVzZXJfZW1haWwiOiJlbWFpbEBhZGRyZXNzLmNvbSJ9.IePgtiBIOCPOJCiZlut25WUGPehkW2yToB36ZuI5q-U' \
+  | json_pp
+
+echo -e "\nGetting invalid photo"
+curl -s -X GET $url/$invalid_id\
+  -H 'Content-Type: application/json' \
+  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsInVzZXJfZW1haWwiOiJlbWFpbEBhZGRyZXNzLmNvbSJ9.IePgtiBIOCPOJCiZlut25WUGPehkW2yToB36ZuI5q-U' \
+  | json_pp
+
+

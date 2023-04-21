@@ -1,0 +1,17 @@
+Deletes valid photo
+{
+   "message" : "Book with id: 22 deleted successfully",
+   "status" : 200
+}
+
+Deletes invalid photo
+{
+   "message" : "record not found",
+   "status" : 404
+}
+
+Deletes unauthorized photo
+{
+   "message" : "Forbidden: Forbidden access",
+   "status" : 403
+}

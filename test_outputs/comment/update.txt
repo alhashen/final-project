@@ -1,0 +1,79 @@
+Comment before being updated
+{
+   "data" : {
+      "comment_message" : "LOL, okay",
+      "created_at" : "2023-04-19T02:00:28.594897+07:00",
+      "id" : 9,
+      "photo" : {
+         "created_at" : "2023-04-18T11:15:46.21605+07:00",
+         "id" : 20,
+         "photo_caption" : "with friends!",
+         "photo_title" : "Nice sunset!",
+         "photo_url" : "http://imgurl.com",
+         "updated_at" : "2023-04-20T15:09:13.706831+07:00",
+         "user" : {
+            "created_at" : "2023-04-15T23:41:29.54589+07:00",
+            "id" : 11,
+            "updated_at" : "2023-04-15T23:41:29.543117+07:00",
+            "username" : "user1232"
+         },
+         "user_id" : 11
+      },
+      "photo_id" : 20,
+      "updated_at" : "2023-04-19T02:00:28.594909+07:00",
+      "user" : {
+         "created_at" : "2023-04-18T13:54:08.816719+07:00",
+         "id" : 16,
+         "updated_at" : "2023-04-18T13:54:08.813481+07:00",
+         "username" : "user12"
+      },
+      "user_id" : 16
+   },
+   "status" : 200
+}
+
+Update valid comment
+{
+   "data" : {
+      "comment_message" : "Nice!",
+      "created_at" : "2023-04-19T02:00:28.594897+07:00",
+      "id" : 9,
+      "photo" : {
+         "created_at" : "2023-04-18T11:15:46.21605+07:00",
+         "id" : 20,
+         "photo_caption" : "with friends!",
+         "photo_title" : "Nice sunset!",
+         "photo_url" : "http://imgurl.com",
+         "updated_at" : "2023-04-20T15:09:13.706831+07:00",
+         "user_id" : 11
+      },
+      "photo_id" : 20,
+      "updated_at" : "2023-04-20T15:11:38.729533+07:00",
+      "user" : {
+         "created_at" : "2023-04-18T13:54:08.816719+07:00",
+         "id" : 16,
+         "updated_at" : "2023-04-18T13:54:08.813481+07:00",
+         "username" : "user12"
+      },
+      "user_id" : 16
+   },
+   "status" : 200
+}
+
+Update comment with invalid id
+{
+   "message" : "record not found",
+   "status" : 404
+}
+
+Update comment with invalid comment value
+{
+   "message" : "comment_message: cannot be blank.",
+   "status" : 400
+}
+
+Update unauthorized comment
+{
+   "message" : "Forbidden: Forbidden access",
+   "status" : 403
+}

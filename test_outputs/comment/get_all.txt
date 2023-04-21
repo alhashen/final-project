@@ -1,0 +1,28 @@
+Get all comments from specific photo id
+{
+   "data" : [
+      {
+         "comment_message" : "Good time!",
+         "created_at" : "2023-04-19T02:28:49.598408+07:00",
+         "id" : 22,
+         "photo_id" : 20,
+         "updated_at" : "2023-04-19T12:47:45.109955+07:00",
+         "user_id" : 16
+      },
+      {
+         "comment_message" : "Nice!",
+         "created_at" : "2023-04-19T02:00:28.594897+07:00",
+         "id" : 9,
+         "photo_id" : 20,
+         "updated_at" : "2023-04-20T15:11:38.729533+07:00",
+         "user_id" : 16
+      }
+   ],
+   "status" : 200
+}
+
+Get all comments with invalid photo id
+{
+   "message" : "record not found",
+   "status" : 404
+}

@@ -1,0 +1,17 @@
+Deletes valid comment
+{
+   "message" : "Comment with id: 8 deleted successfully",
+   "status" : 200
+}
+
+Deletes invalid comment
+{
+   "message" : "record not found",
+   "status" : 400
+}
+
+Deletes unauthorized comment
+{
+   "message" : "Forbidden: Forbidden access",
+   "status" : 403
+}

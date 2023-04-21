@@ -1,0 +1,17 @@
+Deletes valid social media
+{
+   "data" : "Social media with id: 15 deleted successfully",
+   "status" : 200
+}
+
+Deletes invalid social media
+{
+   "message" : "record not found",
+   "status" : 404
+}
+
+Deletes unauthorized social_media
+{
+   "message" : "Forbidden: Forbidden access",
+   "status" : 403
+}

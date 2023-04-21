@@ -1,0 +1,22 @@
+Get all social media
+{
+   "data" : [
+      {
+         "created_at" : "2023-04-19T22:05:57.18397+07:00",
+         "id" : 15,
+         "name" : "Protagonist",
+         "social_media_url" : "http://social_media.com",
+         "updated_at" : "2023-04-19T22:05:57.184001+07:00",
+         "user_id" : 11
+      },
+      {
+         "created_at" : "2023-04-20T12:34:35.27964+07:00",
+         "id" : 17,
+         "name" : "Protagonist",
+         "social_media_url" : "http://social_media.com",
+         "updated_at" : "2023-04-20T12:34:35.27965+07:00",
+         "user_id" : 16
+      }
+   ],
+   "status" : 200
+}

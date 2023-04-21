@@ -1,0 +1,890 @@
+definitions:
+  helper.Response:
+    properties:
+      data: {}
+      message:
+        type: string
+      status:
+        type: integer
+    type: object
+  model.Comment:
+    properties:
+      comment_message:
+        type: string
+      created_at:
+        type: string
+      id:
+        type: integer
+      photo:
+        $ref: '#/definitions/model.Photo'
+      photo_id:
+        type: integer
+      updated_at:
+        type: string
+      user:
+        $ref: '#/definitions/model.User'
+      user_id:
+        type: integer
+    type: object
+  model.Photo:
+    properties:
+      comments:
+        items:
+          $ref: '#/definitions/model.Comment'
+        type: array
+      created_at:
+        type: string
+      id:
+        type: integer
+      photo_caption:
+        example: photo caption
+        type: string
+      photo_title:
+        example: photo title
+        type: string
+      photo_url:
+        example: photo url
+        type: string
+      updated_at:
+        type: string
+      user:
+        $ref: '#/definitions/model.User'
+      user_id:
+        type: integer
+    type: object
+  model.SocialMedia:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      social_media_url:
+        type: string
+      updated_at:
+        type: string
+      user:
+        $ref: '#/definitions/model.User'
+      user_id:
+        type: integer
+    type: object
+  model.SwagComment:
+    properties:
+      comment_message:
+        example: Insert you message here
+        type: string
+    type: object
+  model.SwagPhoto:
+    properties:
+      photo_caption:
+        example: Your caption
+        type: string
+      photo_title:
+        example: Photo Title
+        type: string
+      photo_url:
+        example: http://img-url.com
+        type: string
+    type: object
+  model.SwagSocialMedia:
+    properties:
+      name:
+        example: My Name
+        type: string
+      social_media_url:
+        example: https://socialurl.com
+        type: string
+    type: object
+  model.SwagUserLogin:
+    properties:
+      user_email:
+        example: my_email@address.com
+        type: string
+      user_password:
+        example: my_password
+        type: string
+    type: object
+  model.SwagUserRegister:
+    properties:
+      user_age:
+        example: 15
+        type: integer
+      user_email:
+        example: my_email@address.com
+        type: string
+      user_password:
+        example: my_password
+        type: string
+      username:
+        example: my_username
+        type: string
+    type: object
+  model.User:
+    properties:
+      comments:
+        items:
+          $ref: '#/definitions/model.Comment'
+        type: array
+      created_at:
+        type: string
+      id:
+        type: integer
+      photos:
+        items:
+          $ref: '#/definitions/model.Photo'
+        type: array
+      updated_at:
+        type: string
+      user_age:
+        type: integer
+      user_email:
+        type: string
+      user_password:
+        type: string
+      username:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /comments/{id}:
+    delete:
+      description: |-
+        Return forbidden if the user is not the owner of the comment
+        Validates: (Message)
+      parameters:
+      - description: Comment ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - Bearer: []
+      summary: Delete certain comment that is specified by the id
+      tags:
+      - Comment
+    get:
+      consumes:
+      - application/json
+      description: Input valid comment id through parameter
+      parameters:
+      - description: Comment ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Comment'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - Bearer: []
+      summary: Get comment from specific comment id
+      tags:
+      - Comment
+    put:
+      consumes:
+      - application/json
+      description: |-
+        Return forbidden if the user is not the owner of the comment
+        Validates: (Message)
+      parameters:
+      - description: Comment ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: body
+        in: body
+        name: comment
+        required: true
+        schema:
+          $ref: '#/definitions/model.SwagComment'
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Comment'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - Bearer: []
+      summary: Update certain comment that is specified by the id
+      tags:
+      - Comment
+  /comments/photo/{id}:
+    get:
+      description: Input valid photo ID in the parameter
+      parameters:
+      - description: Photo ID here
+        in: path
+        name: id
+        required: true
+        type: integer
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Comment'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - Bearer: []
+      summary: Return all comments from specific photo ID
+      tags:
+      - Comment
+    post:
+      consumes:
+      - application/json
+      description: |-
+        post a json data to comment
+        Validates: (Message)
+      parameters:
+      - description: Photo ID here
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: '-'
+        in: body
+        name: comment
+        required: true
+        schema:
+          $ref: '#/definitions/model.SwagComment'
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/model.Comment'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - Bearer: []
+      summary: Add comment to a photo
+      tags:
+      - Comment
+  /photos:
+    get:
+      description: Get all photos from specific user ID that was taken from the token
+      parameters:
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Photo'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - Bearer: []
+      summary: Return all photos from this user
+      tags:
+      - Photo
+    post:
+      consumes:
+      - application/json
+      description: |-
+        post a json data to upload photo
+        Validates: (Photo Title, Photo URL)
+      parameters:
+      - description: photo
+        in: body
+        name: photo
+        required: true
+        schema:
+          $ref: '#/definitions/model.SwagPhoto'
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/model.Photo'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - Bearer: []
+      summary: Upload photo
+      tags:
+      - Photo
+  /photos/{id}:
+    delete:
+      description: |-
+        Return forbidden if the user is not the owner of the photo
+        Validates: (Photo Title, Photo URL)
+      parameters:
+      - description: photo id
+        in: path
+        name: id
+        required: true
+        type: integer
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - Bearer: []
+      summary: Delete certain photo that is specified by the id
+      tags:
+      - Photo
+    get:
+      consumes:
+      - application/json
+      description: Input valid photo id through parameter
+      parameters:
+      - description: photo id
+        in: path
+        name: id
+        required: true
+        type: integer
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Photo'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - Bearer: []
+      summary: Get photo by photo id
+      tags:
+      - Photo
+    put:
+      consumes:
+      - application/json
+      description: |-
+        Return forbidden if the user is not the owner of the photo
+        Validates: (Photo Title, Photo URL)
+      parameters:
+      - description: photo id
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: body
+        in: body
+        name: photo
+        required: true
+        schema:
+          $ref: '#/definitions/model.SwagPhoto'
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Photo'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - Bearer: []
+      summary: Update certain photo that is specified by the id
+      tags:
+      - Photo
+  /social_medias:
+    get:
+      parameters:
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.SocialMedia'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - Bearer: []
+      summary: Return all social medias
+      tags:
+      - Social Media
+    post:
+      consumes:
+      - application/json
+      description: |-
+        Specified user was taken from the token. Post a json data to add social media.
+        Validates: (Name, Social Media URL)
+        Error: No duplicates
+      parameters:
+      - description: '-'
+        in: body
+        name: socialMedia
+        required: true
+        schema:
+          $ref: '#/definitions/model.SwagSocialMedia'
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/model.SocialMedia'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - Bearer: []
+      summary: Add social media to a user
+      tags:
+      - Social Media
+  /social_medias/{id}:
+    delete:
+      description: |-
+        Return forbidden if the user is not the owner of the social media
+        Validates: (Name, Social Media URL)
+      parameters:
+      - description: '-'
+        in: path
+        name: id
+        required: true
+        type: integer
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - Bearer: []
+      summary: Delete certain social media that is specified by the id
+      tags:
+      - Social Media
+    get:
+      consumes:
+      - application/json
+      description: Input valid social media id into parameter
+      parameters:
+      - description: Social Media ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.SocialMedia'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - Bearer: []
+      summary: Get social media by social media id
+      tags:
+      - Social Media
+    put:
+      consumes:
+      - application/json
+      description: |-
+        Return forbidden if the user is not the owner of the social media
+        Validates: (Name, Social Media URL)
+      parameters:
+      - description: Social Media ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: body
+        in: body
+        name: socialMedia
+        required: true
+        schema:
+          $ref: '#/definitions/model.SwagSocialMedia'
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.SocialMedia'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - Bearer: []
+      summary: Update certain social media that is specified by the id
+      tags:
+      - Social Media
+  /users/login:
+    post:
+      consumes:
+      - application/json
+      description: |-
+        post a json data to login
+        Validates: (Email, Password)
+      parameters:
+      - description: Email must be valid, Password longer than 5 characters
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/model.SwagUserLogin'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - type: string
+            - properties:
+                status:
+                  type: integer
+                token:
+                  type: string
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.Response'
+      summary: Log certain user in
+      tags:
+      - User
+  /users/register:
+    post:
+      consumes:
+      - application/json
+      description: |-
+        post a json data to register
+        Validates: (Username, Email, Password, Age[13 >])
+      parameters:
+      - description: user
+        in: body
+        name: User
+        required: true
+        schema:
+          $ref: '#/definitions/model.SwagUserRegister'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/model.User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.Response'
+      summary: Register a user
+      tags:
+      - User
+swagger: "2.0"

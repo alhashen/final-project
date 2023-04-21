@@ -1,0 +1,25 @@
+Register valid user
+{
+   "data" : {
+      "created_at" : "2023-04-20T15:33:41.975878+07:00",
+      "id" : 19,
+      "updated_at" : "2023-04-20T15:33:41.973293+07:00",
+      "user_age" : 15,
+      "user_email" : "another_email@address.com",
+      "user_password" : "$2a$05$QPQNxk.6kUqhMJFcoGPCuOJmfq.1NDUC7erETwewUfsUcrqu8Cn76",
+      "username" : "dbtest12"
+   },
+   "status" : 201
+}
+
+Register duplicate user data
+{
+   "message" : "ERROR: duplicate key value violates unique constraint \"users_username_key\" (SQLSTATE 23505)",
+   "status" : 400
+}
+
+Register invalid user
+{
+   "message" : "user_age: must be no less than 13; user_email: must be a valid email address.",
+   "status" : 400
+}

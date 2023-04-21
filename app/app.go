@@ -18,6 +18,6 @@ func StartApplication() {
 	app := service.NewService(repo)
 	route.RegisterAPI(router, app)
 
-	port := os.Getenv("APP_PORT")
+	port := os.Getenv("PORT")
 	router.Run(fmt.Sprintf(":%s", port))
 }

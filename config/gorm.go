@@ -45,8 +45,8 @@ func InitGorm() error {
 }
 
 func (p *Gorm) OpenConnection() error {
-	dsn := fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=disable",
-		p.Address, p.Port, p.Username, p.Database)
+	dsn := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
+		p.Address, p.Port, p.Username, p.Password, p.Database)
 
 	dbConnection, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
